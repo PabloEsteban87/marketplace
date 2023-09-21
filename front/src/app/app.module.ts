@@ -26,6 +26,7 @@ import { NewcustomerComponent } from './examples/register_pablo/newcustomer/newc
 import {ReactiveFormsModule} from '@angular/forms';
 
 import { RouterModule, Routes } from '@angular/router';
+import { SearchPipe } from './examples/service/pipe/search.pipe';
 
 
 
@@ -43,7 +44,8 @@ import { RouterModule, Routes } from '@angular/router';
     LoginComponent,
     ComicdetailviewComponent,
     ComicDetailComponent,
-    RegisterComponent
+    RegisterComponent,
+    SearchPipe
    
   ],
   imports: [
@@ -55,7 +57,9 @@ import { RouterModule, Routes } from '@angular/router';
     RouterModule,
   
   ],
-  providers: [],
+  providers: [
+    SearchPipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

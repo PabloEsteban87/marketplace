@@ -1,6 +1,6 @@
 <div class="container">
   <div class="container-search">
-    <input ng-model="searchText" class="search-up" formControlName="search" type="text"
+    <input [(ngModel)]="searchText1" class="search-up" type="text"
       placeholder="Introduce tu búsqueda"><br>
     <img (click)="globalsearch()" class="image-search-1" src="../../../assets/buscar.png" alt="buscar">
   </div>
@@ -164,7 +164,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let comic of comicsOnCurrentPage">
+           <tr *ngFor="let comic of comicsOnCurrentPage | search: searchText1">
             <td><a [routerLink]="['/comic', comic.isbn]"></a>{{ comic.isbn }}</td>
             <td><a [routerLink]="['/comic', comic.isbn]">{{ comic.title }}</a></td>
             <td>{{ comic.author }}</td>

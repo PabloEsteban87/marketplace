@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ComicService } from '../../services/comic.service';
+import {SearchPipe} from '../../examples/service/pipe/search.pipe';
 
 @Component({
   selector: 'app-comic-table',
   templateUrl: './comic-table.component.html',
   styleUrls: ['./comic-table.component.scss']
 })
-export class ComicTableComponent implements OnInit {
+
+
+
+export class ComicTableComponent implements OnInit{
+[x: string]: any;
   comics: any[] = [];
   genres: any[] = [];
   selectedGenre: any = null;
@@ -27,20 +32,22 @@ export class ComicTableComponent implements OnInit {
   showisbnFilterPopup: boolean = false;
   selectedisbn: string = '';
 
+  searchText = '';
+  searchText1 = ''; 
 
-  constructor(private comicService: ComicService) {}
+  constructor(private comicService: ComicService, private searchPipe: SearchPipe ) {}
 
   ngOnInit(): void {
     this.getComics();
     this.getGenres();
-    this.resetFiltersAndSorting(); 
-  }
+    this.resetFiltersAndSorting();
+}
 
   getComics(): void {
     this.comicService.getComics().subscribe((comics) => {
       this.comics = comics;
       this.applyFilters();
-      this.globalsearch();
+/*       this.globalsearch(); */
     });
   }
 
@@ -190,9 +197,11 @@ export class ComicTableComponent implements OnInit {
     this.selectedisbn = '';
   }
 
-  globalsearch(){
-    this.applyFilters();
-  }
+   globalsearch(){
+  this.searchText ='';
+  } 
+
+
 
   popup!: HTMLElement;
 
