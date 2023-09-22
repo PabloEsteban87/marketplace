@@ -7,7 +7,8 @@ import { ComicService } from '../../../services/comic.service';
 })
 export class SearchPipe implements PipeTransform, OnInit{
 
-comics: any[] = []; 
+comics: any[] = [];
+comics2: any[] = [];  
 
 constructor(private comicService: ComicService){}
 
@@ -23,19 +24,14 @@ constructor(private comicService: ComicService){}
   } 
   
 
-  transform(items: any, searchText1: string): any {
-    if (!items) return []; 
-    else if (!searchText1) return items;
-    else{
-    
-    
-    for(let item of items){
-      if(item.toString().toLowerCase() == searchText1.toLowerCase()){
-        return this.comics.push(item)
-
-      }
-
-    }
-  }
+  transform(items: any[], searchText1: string): any {
+ /*    if (!items) return [];  */
+     if (searchText1){ 
+      console.log(items)
+      return items.filter(item => item.toString().includes(searchText1));
+      } 
+    else {
+      return items;
+    }  
 }
 }
