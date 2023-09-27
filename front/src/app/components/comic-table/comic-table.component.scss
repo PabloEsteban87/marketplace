@@ -9,13 +9,9 @@ table {
   border-collapse: separate;
   border: 0.4vh solid black;
 }
-
-/* table th:nth-child(4) {
-  border: 0px;
-  background-color: white;
-  border-collapse: none !important;
-} */
-
+a{
+  cursor:pointer;
+}
 tbody {
   text-align: center;
   vertical-align: middle;
@@ -130,7 +126,7 @@ tr {
   cursor: pointer;
   width: 3vh;
   margin-left: 100%;
-  /*   margin-right: 8vh;  */
+
 }
 
 .btn-primary {
@@ -140,7 +136,7 @@ tr {
 
 .search {
   text-align: left;
-  /*   width: 4vh;  */
+
 }
 
 img,
@@ -150,35 +146,7 @@ svg {
 }
 
 
-/* @media (min-width: 320px) {
-  table {
-    font-size: 1vh;
-  }
-  .pagination-container {
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1vh;
-    margin-bottom: 2vh;
-  }
-  .filter-icon {
-    margin-left: 4%;
-    cursor: pointer;
-    width: 1.5vh; 
-    margin-right: 8vh; 
-  }
-  img, svg {
-    width: 1.5vh; 
-    vertical-align: middle;
-  }
-  .search{
-    margin-left: 4%;
-    cursor: pointer;
-    width: 1.5vh; 
-    margin-right: 8vh; 
-  }
-} */
+
 
 .container {
   max-width: 100%;
@@ -226,10 +194,10 @@ svg {
   }
 
   .search {
-    /*    margin-left: 4%; */
+
     cursor: pointer;
     width: 3vh;
-    /*     margin-right: 8vh;  */
+
   }
 }
 
@@ -303,12 +271,7 @@ svg {
 
   }
 
-  /*   .search{
-    margin-left: 4%;
-    cursor: pointer;
-    width: 1.5vh; 
-    margin-right: 8vh;  
-  } */
+
 
   .quitar {
     display: none;
@@ -343,5 +306,3 @@ svg {
     display: none;
   }
 }
-
-

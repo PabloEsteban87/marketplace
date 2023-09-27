@@ -54,7 +54,7 @@
       </thead>
       <tbody>
 
-        <tr *ngFor="let comic of comicsOnCurrentPage">
+        <tr *ngFor="let comic of comics;index as i">
 
           <td><a [routerLink]="['/comic', comic.isbn]"></a>{{ comic.isbn }}</td>
           <td><a [routerLink]="['/comic', comic.isbn]">{{ comic.title }}</a></td>
@@ -66,13 +66,13 @@
           </td>
           <td>{{ comic.price }}</td>
           <td>{{ comic.ishardcover ? "Dura" : "Blanda" }}</td>
-          <td> <a href="https://www.facebook.com/">
+          <td> <a (click)="deleteShoppingComic(i)">
               <img class="trash" src="../../../assets/trash_icon_213986.svg" />
             </a></td>
         </tr>
       </tbody>
     </table>
-    
+
     <div class="container">
       <div class="row">
         <div class="col-6 ">
@@ -89,7 +89,7 @@
             <tbody>
               <tr>
                 <td>Subtotal</td>
-                <td>28.98€</td>
+                <td > {{ subtotal | number : '1.0-2'}} €</td>
               </tr>
               <tr>
                 <td>Gastos de envío</td>
@@ -97,7 +97,8 @@
               </tr>
               <tr>
                 <td>Total pedido</td>
-                <td>28.98€</td>
+                <td *ngIf="subtotal >0 "> {{ total | number : '1.0-2'}} €</td>
+                <td *ngIf="subtotal==0"></td>
               </tr>
             </tbody>
           </table>

@@ -2,17 +2,30 @@
 .redes-sociales{
   margin-top: 0px;
 }
+.main-footer {
+  position: fixed;
+  bottom: 0;
+}
 }
 
 @media screen and (max-width: 767px){
   .redes-sociales{
     margin-top: 10px;
   }
+  .main-footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color:rgba(29, 41, 81, 1);
+    color: white;
+    padding: 10px 0;
+  
   }
-
+}
 
 .main-footer {
-  position: relative;
+  // position: relative;
   bottom: 0;
   left: 0;
   width: 100%;

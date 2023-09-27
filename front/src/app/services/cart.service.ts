@@ -31,7 +31,13 @@ export class CartService {
   private updateCartStorage() {
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
-
+  getSubtotal(): number{
+    let subtotal:number= 0 ;
+    for(let comic of this.cartItems){
+      subtotal += comic.price;
+    } 
+    return subtotal;
+  }
  
 
 }

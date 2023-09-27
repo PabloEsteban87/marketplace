@@ -9,12 +9,13 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/comicList" (click)="closeMenu()">Comprar</a>      
       <a class="nav-item nav-link" routerLink="" (click)="closeMenu()">Historial</a>
+      <a class="nav-item nav-link cartlink" routerLink="/cart" (click)="closeMenu()">Carro Compra</a>
       <a class="nav-item nav-link" routerLink="" (click)="closeMenu()">Cerrar Sesión</a>
+      
     </div>
     <div class="icons d-none d-sm-none d-none d-md-block">
       <img src="/assets/cart.png"  alt="cart" routerLink="/cart">
-      <img src="/assets/user.png" alt="user">
-      <span>{{ getLoggedInUsername() }}</span> 
+      <img src="/assets/user.png" alt="user"> 
     </div>
   </div>
 </nav>
