@@ -19,7 +19,7 @@ import { ShopingCartClientComponent } from './components/shoping-cart-client/sho
 import { RegisterAComponent } from './components/register-a/register-a.component';
 import { HomeloginviewComponent } from './views/homeloginview/homeloginview.component';
 
-
+import {CookieService} from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -47,7 +47,7 @@ import { HomeloginviewComponent } from './views/homeloginview/homeloginview.comp
     RouterModule,
  
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

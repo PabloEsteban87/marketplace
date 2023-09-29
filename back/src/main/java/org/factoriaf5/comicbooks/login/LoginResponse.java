@@ -9,4 +9,5 @@ import lombok.Setter;
 public class LoginResponse {
     String message;
     Boolean status;
+    
 }

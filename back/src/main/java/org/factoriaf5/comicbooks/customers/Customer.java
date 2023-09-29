@@ -66,6 +66,9 @@ public class Customer {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "rol")
+    private String rol;
+
     @OneToMany(fetch = FetchType.LAZY)
     public Set<Order> orders = new HashSet<>();
 

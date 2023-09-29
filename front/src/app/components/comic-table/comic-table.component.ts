@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ComicService } from '../../services/comic.service';
 import { Comic } from 'src/app/models/Comic';
 import { Genre } from 'src/app/models/Genre';
+
+import {TokenServiceService} from '../../services/tokenservice.service';
+
 @Component({
   selector: 'app-comic-table',
   templateUrl: './comic-table.component.html',
@@ -30,13 +33,25 @@ export class ComicTableComponent implements OnInit {
   searchTextGlobal: string = '';
   filteredComics: Comic[] = [];
 
-  constructor(private comicService: ComicService) {}
+  info: any = {};
+
+
+
+  constructor(private comicService: ComicService, private tokenService: TokenServiceService) {}
 
   ngOnInit(): void {
     this.getComics();
     this.getGenres();
     this.filteredComics = this.comics;
     this.resetFiltersAndSorting();
+
+    this.info = {
+      email: this.tokenService.getUserName(),
+      authorities: this.tokenService.getAuthorities()
+    };
+
+
+
   }
 
   getComics(): void {
