@@ -31,7 +31,8 @@ export class RegisterAComponent {
     town: '',
     province: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    role: ''
   }
   constructor(
     private formBuilder: FormBuilder,
@@ -55,6 +56,7 @@ export class RegisterAComponent {
       postalcode: [''],
       town: [''],
       province: [''],
+      role: [''],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     },  { validators: this.passwordMatchValidator.bind(this) });
@@ -70,7 +72,10 @@ export class RegisterAComponent {
   }
   registerCustomer(): void {
     if (this.registrationForm.valid) {
+      this.registrationForm.setValue({role: "USER"});
+      console.log(this.registrationForm.value);
       const registrationData = this.registrationForm.value;
+      
       this.customerService.register(registrationData).subscribe(
         (response: any) => {
           Swal.fire({

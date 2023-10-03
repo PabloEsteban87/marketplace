@@ -1,14 +1,20 @@
 package org.factoriaf5.comicbooks.customers;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.factoriaf5.comicbooks.orders.Order;
+import org.factoriaf5.comicbooks.roles.Role;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "customers")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer {
+public class Customer implements Serializable {
 
     @Id
     @Column(name = "email", nullable = false)
@@ -68,6 +74,15 @@ public class Customer {
 
     @OneToMany(fetch = FetchType.LAZY)
     public Set<Order> orders = new HashSet<>();
+
+    //añadido Pablo
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+        @JoinTable(
+                name = "customer_role",
+                joinColumns = {@JoinColumn(name = "customer_id")},
+                inverseJoinColumns = {@JoinColumn(name = "role_id")}
+        )
+Set<Role> roles = new HashSet<>();
 
     // @ManyToMany
     // @JoinTable(name="customer_order",
@@ -233,6 +248,10 @@ public class Customer {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
     }
 
     
