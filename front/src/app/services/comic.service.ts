@@ -24,8 +24,8 @@ export class ComicService {
     );
   }
 
-  getComics(): Observable<any[]> {
-    return this.http.get<any[]>(this.comicsUrl)
+  getComics(): Observable<Comic[]> {
+    return this.http.get<Comic[]>(this.comicsUrl)
       .pipe(
         catchError(error => {
           console.error('Error en la solicitud HTTP:', error);
@@ -57,6 +57,11 @@ export class ComicService {
 
     return this.http.get<any[]>(`${this.comicsUrl}`);
   }
+
+  newComic(comic:Comic){
+    return this.http.post<Comic>(`${this.comicsUrl}`, comic);
+  }   
+
   
   updateComic(isbn: string, dto:UpdateComicDTO): Observable<any> {
   
@@ -68,6 +73,7 @@ export class ComicService {
     const editUrl = `${this.comicsUrl}/editar/${comic.isbn}`;
     return this.http.put<Comic>(editUrl, comic);
   }
+
 }
 
 

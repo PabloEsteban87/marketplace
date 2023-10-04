@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditComicComponent } from './EditComicComponent';
+import { EditComicComponent } from '../edit-comic/edit-comic.component';
 
 describe('EditComicComponent', () => {
   let component: EditComicComponent;

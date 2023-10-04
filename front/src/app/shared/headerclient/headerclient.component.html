@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" [ngClass]="{'show': isMenuOpen}" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/comicList" (click)="closeMenu()">Comprar</a>      
-      <a class="nav-item nav-link" routerLink="/comicList" (click)="closeMenu()">Historial</a>
+      <a class="nav-item nav-link" routerLink="//purchase-history/:email" (click)="closeMenu()">Historial</a>
       <a class="nav-item nav-link cartlink" routerLink="/cart" (click)="closeMenu()">Carro Compra</a>
       <a class="nav-item nav-link" (click)="onCloseSession()">Cerrar Sesión</a>
       

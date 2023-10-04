@@ -38,6 +38,7 @@ export class UserService {
     this.loggedInEmail = "";
     this.loggedInUsername = "";
     this.cartService.removeAll();
+    
     this.router.navigateByUrl('/');
   }
 }

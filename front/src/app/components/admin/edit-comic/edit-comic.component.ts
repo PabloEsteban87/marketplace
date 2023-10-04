@@ -4,6 +4,7 @@ import { ComicService } from 'src/app/services/comic.service';
 import { Comic } from '../../../models/Comic'; 
 import { Genre } from '../../../models/Genre';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { HttpClient } from '@angular/common/http';
 
 const allGenres: string[] = [
   "Infantil",
@@ -25,7 +26,8 @@ export class EditComicComponent implements OnInit {
   editedComic: Comic = new Comic();
   allGenres = allGenres; 
   newGenres: string[] = [];
-  constructor(public bsModalRef: BsModalRef, private comicService: ComicService) {}
+  photoPreviewUrl: any;
+  constructor(public bsModalRef: BsModalRef, private comicService: ComicService, private http: HttpClient) {}
 
   ngOnInit(): void {
    
@@ -48,6 +50,19 @@ export class EditComicComponent implements OnInit {
   
     this.newGenres = [];
   }
+  
+  onFileSelected(event: any) {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.photoPreviewUrl = e.target.result;
+        this.editedComic.photo = e.target.result; 
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  }
+
   openEditForm(comic: Comic) {
     
     this.editedComic = { ...comic };
