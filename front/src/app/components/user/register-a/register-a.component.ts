@@ -32,7 +32,7 @@ export class RegisterAComponent {
     province: '',
     password: '',
     confirmPassword: '',
-    role: ''
+    role: 0 
   }
   constructor(
     private formBuilder: FormBuilder,
@@ -56,7 +56,7 @@ export class RegisterAComponent {
       postalcode: [''],
       town: [''],
       province: [''],
-      role: ['USER'],
+      role: [''], 
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     },  { validators: this.passwordMatchValidator.bind(this) });
@@ -71,9 +71,12 @@ export class RegisterAComponent {
     }
   }
   registerCustomer(): void {
-    if (this.registrationForm.valid) {
-      this.registrationForm.setValue({role: "USER"});
-      console.log(this.registrationForm.value);
+    this.registrationForm.patchValue({role: 1}); 
+    this.registrationForm.get('role')!.clearValidators();
+    console.log(this.registrationForm.value); 
+  /*   if (this.registrationForm.valid) { */
+        
+      
       const registrationData = this.registrationForm.value;
       
       this.customerService.register(registrationData).subscribe(
@@ -95,12 +98,12 @@ export class RegisterAComponent {
           console.error('Error durante el registro', error);
         }
       );
-    } else {
+    /* } else {
       Swal.fire({
         icon: 'error',
         title: 'Error de validación',
         text: 'Por favor, complete todos los campos correctamente'
       });
-    }
+    } */
   }
 }  

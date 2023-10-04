@@ -16,5 +16,5 @@ export interface Customer{
     province: string;
     password: string;
     confirmPassword: string;
-    role: string; 
+    role: number;  
 }
