@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
     <div class="container-search">
       <input ng-model="searchText" class="search-up" type="text" placeholder="Introduce tu búsqueda"
         [(ngModel)]="searchTextGlobal" (input)="globalsearch()" />
@@ -109,10 +109,7 @@
               </span>
             </td>
             <td>{{ comic.price }}€</td>
-            <td>{{ comic.ishardcover ? "Dura" : "Blanda" }}</td>
-            <td> <a (click)="deleteShoppingComic(i)">
-                <img class="trash" src="../../../assets/trash_icon_213986.svg" />
-              </a></td>
+            <td>{{ comic.ishardcover ? "Dura" : "Blanda" }}</td>        
           </tr>
         </tbody>
       </table>
@@ -145,4 +142,4 @@
           </li>
         </ul>
       </nav>
-    </div> -->
+    </div>
