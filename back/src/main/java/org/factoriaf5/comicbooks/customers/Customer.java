@@ -1,9 +1,12 @@
 package org.factoriaf5.comicbooks.customers;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import org.factoriaf5.comicbooks.genres.Genre;
 import org.factoriaf5.comicbooks.orders.Order;
 import org.factoriaf5.comicbooks.roles.Role;
 
@@ -75,14 +78,8 @@ public class Customer implements Serializable {
     @OneToMany(fetch = FetchType.LAZY)
     public Set<Order> orders = new HashSet<>();
 
-    //añadido Pablo
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-        @JoinTable(
-                name = "customer_role",
-                joinColumns = {@JoinColumn(name = "customer_id")},
-                inverseJoinColumns = {@JoinColumn(name = "role_id")}
-        )
-Set<Role> roles = new HashSet<>();
+   @ManyToMany(mappedBy = "customers")
+    private List<Role> role = new ArrayList<>();
 
     // @ManyToMany
     // @JoinTable(name="customer_order",
@@ -250,8 +247,8 @@ Set<Role> roles = new HashSet<>();
         this.orders = orders;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public List<Role> getRoles() {
+        return role;
     }
 
     

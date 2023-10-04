@@ -56,7 +56,7 @@ export class RegisterAComponent {
       postalcode: [''],
       town: [''],
       province: [''],
-      role: [''],
+      role: ['USER'],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     },  { validators: this.passwordMatchValidator.bind(this) });
