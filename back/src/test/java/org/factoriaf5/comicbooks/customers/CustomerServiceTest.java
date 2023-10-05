@@ -21,7 +21,7 @@ public class CustomerServiceTest {
         when(repository.save(any(Customer.class))).thenReturn(savedCustomer);
         when(repository.findByEmail("user@user.com")).thenReturn(java.util.Optional.of(savedCustomer));
 
-        service = new CustomerService(repository);
+        service = new CustomerService(repository, null);
 
         Customer response = service.create(savedCustomer);
 
@@ -56,7 +56,7 @@ public class CustomerServiceTest {
 
         when(repository.findAll()).thenReturn(CustomerGetAll);
 
-        service = new CustomerService(repository);
+        service = new CustomerService(repository, null);
         java.util.List<Customer> response = service.getAll();
 
         assertNotNull(response);
@@ -75,7 +75,7 @@ public class CustomerServiceTest {
         when(repository.save(any(Customer.class))).thenReturn(newCustomer);
         when(repository.findByEmail("user@user.com")).thenReturn(java.util.Optional.of(newCustomer));
 
-        service = new CustomerService(repository);
+        service = new CustomerService(repository, null);
         Customer response = service.update("user@user.com", newCustomer);
 
         assertNotNull(response);
@@ -110,7 +110,7 @@ public class CustomerServiceTest {
 
         when(repository.findByEmail("user@user.com")).thenReturn(java.util.Optional.of(Customer));
 
-        service = new CustomerService(repository);
+        service = new CustomerService(repository, null);
 
         Customer response = service.delete("user@user.com");
 

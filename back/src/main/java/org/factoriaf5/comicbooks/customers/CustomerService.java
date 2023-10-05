@@ -5,21 +5,36 @@ import java.util.Optional;
 
 import org.factoriaf5.comicbooks.login.LoginDTO;
 import org.factoriaf5.comicbooks.login.LoginResponse;
+import org.factoriaf5.comicbooks.roles.Role;
+import org.factoriaf5.comicbooks.roles.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class CustomerService {
 
     CustomerRepository repository;
+    RoleRepository repository2;
+
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public CustomerService(CustomerRepository repository) {
+    public CustomerService(CustomerRepository repository, RoleRepository repository2 ) {
         this.repository = repository;
+        this.repository2 = repository2;
+    }
+
+    @Transactional
+    public Role addRoleToCustomer(Long idrole, Customer customer){
+          Role role = repository2.findById(idrole).orElseThrow(() -> new RuntimeException("No se encontró la entidad role"));
+          customer = repository.save(customer); 
+          role.getCustomer().add(customer);
+          return role;
     }
 
     public Customer create(Customer customer) {
@@ -86,4 +101,6 @@ public class CustomerService {
             return new LoginResponse("Email not exist", false);
         }         
     }
+
+
 }

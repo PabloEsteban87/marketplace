@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class CustomerDetailsImpl  implements UserDetails {
 
-    private Customer customer;
+     private Customer customer;
 
 
     public CustomerDetailsImpl(Optional<Customer> customer) {
@@ -21,12 +21,12 @@ public class CustomerDetailsImpl  implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-       List<Role> roles = customer.getRoles();
+    //    Role roles = customer.getRole();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRol()));
-        }
+       
+            // authorities.add(new SimpleGrantedAuthority(roles.getRole()));
+      
         return authorities;
        
     }
@@ -59,6 +59,6 @@ public class CustomerDetailsImpl  implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
+    } 
     
 }

@@ -50,9 +50,12 @@ public class SecurityConfiguration  implements WebMvcConfigurer{
                         .requestMatchers(HttpMethod.POST).permitAll()
                         .requestMatchers(HttpMethod.GET).permitAll()
                         .requestMatchers("/customers/**").permitAll()
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/customers/login").permitAll()
                         .requestMatchers("/genres/**").permitAll()
                         .requestMatchers("/comics/**").permitAll()
+                        .requestMatchers("/roles/**").permitAll()
+                        .requestMatchers("/customer_role/**").permitAll()
                         .requestMatchers("/orders/**").permitAll())
 
                 .httpBasic(withDefaults())
