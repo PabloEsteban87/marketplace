@@ -6,131 +6,119 @@
       </div>
       <div class="modal-body">
         <div class="left-column">
-          <form (ngSubmit)="saveChanges()" #editForm="ngForm">
-            <div class="form-group">
-              <label for="isbn">ISBN</label>
-              <input
-                type="text"
-                class="form-control"
-                id="isbn"
-                name="isbn"
-                [(ngModel)]="editedComic.isbn"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="title">Título</label>
-              <input
-                type="text"
-                class="form-control"
-                id="title"
-                name="title"
-                [(ngModel)]="editedComic.title"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="author">Autor</label>
-              <input
-                type="text"
-                class="form-control"
-                id="author"
-                name="author"
-                [(ngModel)]="editedComic.author"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="coverType">Tapa</label>
-              <select
-                class="form-control"
-                id="coverType"
-                name="coverType"
-                [(ngModel)]="editedComic.ishardcover"
-                required
-              >
-                <option value="true">Dura</option>
-                <option value="false">Blanda</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="price">Precio</label>
-              <input
-                type="number"
-                class="form-control"
-                id="price"
-                name="price"
-                [(ngModel)]="editedComic.price"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="synopsis">Sinopsis</label>
-              <textarea
-                class="form-control"
-                id="synopsis"
-                name="synopsis"
-                [(ngModel)]="editedComic.synopsis"
-              ></textarea>
-            </div>
-            <div class="form-group">
-              <label for="stock">Stock</label>
-              <input
-                type="number"
-                class="form-control"
-                id="stock"
-                name="stock"
-                [(ngModel)]="editedComic.stock"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="genres">Géneros Actuales</label>
-              <select class="form-control" id="genres" name="genres" [(ngModel)]="editedComic.genres" multiple>
-                <option *ngFor="let genre of editedComic.genres" [value]="genre.id">{{ genre.name }}</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="newGenres">Agregar Nuevos Géneros</label>
-              <input
-                type="text"
-                class="form-control"
-                id="newGenres"
-                name="newGenres"
-                [(ngModel)]="newGenres"
-                (blur)="addNewGenres()"
-              />
-            </div>
-          </form>
-        </div>
-        <div class="right-column">
+        <form (ngSubmit)="saveChanges()" #editForm="ngForm">
           <div class="form-group">
-            <label for="photo">Cargar Foto</label>
+            <label for="isbn">ISBN</label>
             <input
-              type="file"
-              class="form-control-file"
-              id="photo"
-              name="photo"
-              (change)="onFileSelected($event)"
+              type="text"
+              class="form-control"
+              id="isbn"
+              name="isbn"
+              [(ngModel)]="editedComic.isbn" disabled
+              required
             />
           </div>
-          <div class="form-group preview-container">
-            <label for="photo-preview">Vista Previa de la Foto</label>
-            <img
-              src="{{ photoPreviewUrl }}"
-              id="photo-preview"
-              class="img-fluid"
-              alt="Vista Previa"
+          <div class="form-group">
+            <label for="title">Título</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              name="title"
+              [(ngModel)]="editedComic.title"
+              required
             />
           </div>
+          <div class="form-group">
+            <label for="author">Autor</label>
+            <input
+              type="text"
+              class="form-control"
+              id="author"
+              name="author"
+              [(ngModel)]="editedComic.author"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="coverType">Tapa</label>
+            <select
+              class="form-control"
+              id="coverType"
+              name="coverType"
+              [(ngModel)]="editedComic.ishardcover"
+              required
+            >
+              <option value="true">Dura</option>
+              <option value="false">Blanda</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="price">Precio</label>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              name="price"
+              [(ngModel)]="editedComic.price"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="synopsis">Sinopsis</label>
+            <textarea
+              class="form-control"
+              id="synopsis"
+              name="synopsis"
+              [(ngModel)]="editedComic.synopsis"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="stock">Stock</label>
+            <input
+              type="number"
+              class="form-control"
+              id="stock"
+              name="stock"
+              [(ngModel)]="editedComic.stock"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="genres">Géneros</label>
+            <select class="form-control" id="genres" name="genres" [(ngModel)]="editedComic.genres" multiple>
+              <option *ngFor="let genre of editedComic.genres"disabled [value]="genre.id">{{ genre.name }}</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+           
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">
-          Cancelar
-        </button>
-        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-      </div>
-    </div>
-  </div>
-</div>
+        <form (ngSubmit)="saveChanges()" #editForm="ngForm">
+          <div class="right-column">
+            <div class="form-group">
+              <label for="photo"></label>
+              <img [src]="'http://localhost:8000/files/' + editedComic.photo" class="img-fluid small-image" alt="Foto Actual">
+            </div>
+            <div class="form-group">
+              <label for="photo">Nueva Foto</label>
+              <input
+                type="file"
+                class="form-control-file"
+                id="photo"
+                name="photo"
+                (change)="onImageSelected($event)"
+              />
+              <img
+                *ngIf="photoPreviewUrl"
+                [src]="photoPreviewUrl"
+                class="img-fluid small-image"
+                alt="Nueva Foto"
+              />
+            </div>
+          </div>
+          
+        </form>
+

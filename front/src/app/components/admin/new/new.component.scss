@@ -25,6 +25,28 @@ h2{
     width: 20%;
     padding: 1%;
   }
+  .btn-short{
+    // cursor:pointer;
+    width: auto;
+    height: auto;
+    padding:1px;
+  }
+
+  //style.scss
+.remove-spinner>input[type=number]::-webkit-inner-spin-button, 
+.remove-spinner>input[type=number]::-webkit-outer-spin-button {
+  /* Chrome, Safari, Edge, Opera */
+  -webkit-appearance: none; 
+  margin: 0; 
+
+  }
+ 
+  /* Firefox */
+  .remove-spinner>input[type=number] {//se puede poner [matInput]
+    appearance: textfield;  
+    
+   }
+ 
   
  
   

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Comic, UpdateComicDTO } from '../models/Comic';
 import { of } from 'rxjs';
@@ -8,10 +8,14 @@ import { Genre } from '../models/Genre';
   providedIn: 'root'
 })
 export class ComicService {
+  uploadImage(newImage: File) {
+    throw new Error('Method not implemented.');
+  }
 
   private comics: Comic[] = [];
   private comicsUrl = 'http://localhost:8000/comics'; 
   private genresUrl = 'http://localhost:8000/genres'; 
+  private photUrl= 'http://localhost:8000/files';
   private genres: Genre[] = [];
   constructor(private http: HttpClient) { 
     this.getGenres().subscribe(
@@ -72,6 +76,17 @@ export class ComicService {
   editComic(comic: Comic): Observable<Comic> {
     const editUrl = `${this.comicsUrl}/editar/${comic.isbn}`;
     return this.http.put<Comic>(editUrl, comic);
+  }
+  uploadComicPhoto(isbn: string, photo: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('isbn', isbn);
+    formData.append('photo', photo);
+
+    const headers = new HttpHeaders();
+   
+
+    return this.http.post(`${this.photUrl}`, formData, { headers })
+  
   }
 
 }
