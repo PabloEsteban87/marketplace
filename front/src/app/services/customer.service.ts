@@ -9,16 +9,16 @@ import { CustomerRole } from '../models/CustomerRole';
 })
 export class CustomerService {
   private customerUrl = 'http://localhost:8000/customers'
-   private customerUrl2 = 'http://localhost:8000/customer_role'
+   private customerUrl2 = 'http://localhost:8000/roles'
   
   constructor(private httpClient: HttpClient) { }
   register(customer : Customer){
     return this.httpClient.post<Customer>(this.customerUrl, customer);
   }
 
-  registerCustomerRole(role:CustomerRole) : Observable<CustomerRole>{
+  registerCustomerRole(idrole: number, idcustomer: string) : Observable<CustomerRole>{
 
-    return this.httpClient.post<CustomerRole>(this.customerUrl, role);
+    return this.httpClient.post<CustomerRole>(`${this.customerUrl}/${idcustomer}/role/${idrole}`, {});
   }
   
   getCustomer(email: string) : Observable<Customer>{

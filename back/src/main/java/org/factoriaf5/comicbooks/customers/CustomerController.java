@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 
+
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 // @CrossOrigin(origins = "*", methods = {RequestMethod.GET,
@@ -69,8 +71,8 @@ public class CustomerController {
         return ResponseEntity.ok(loginResponse);
     }
 
-    @PostMapping(path = "/{roleId}")
-    public ResponseEntity<org.factoriaf5.comicbooks.roles.Role> addRoleToCustomer(@PathVariable Long roleId, @RequestBody Customer customer) {
-        return ResponseEntity.ok(service.addRoleToCustomer(roleId, customer));
+    @PostMapping(path = "/{idcustomer}/role/{idrole}")
+    public ResponseEntity<?> addRoleToCustomer(@PathVariable Long idrole, @PathVariable String idcustomer) {
+        return ResponseEntity.ok(service.addRoleToCustomer(idrole, idcustomer));
     }
 }

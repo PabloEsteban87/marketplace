@@ -30,11 +30,14 @@ public class CustomerService {
     }
 
     @Transactional
-    public Role addRoleToCustomer(Long idrole, Customer customer){
+    public Customer addRoleToCustomer(Long idrole, String idcustomer){
+          Customer customer = repository.findByEmail(idcustomer).orElseThrow(() -> new RuntimeException("No se encontró la entidad customer"));
           Role role = repository2.findById(idrole).orElseThrow(() -> new RuntimeException("No se encontró la entidad role"));
-          customer = repository.save(customer); 
           role.getCustomer().add(customer);
-          return role;
+          customer.getRole().add(role);
+          return repository.save(customer); 
+         
+         
     }
 
     public Customer create(Customer customer) {

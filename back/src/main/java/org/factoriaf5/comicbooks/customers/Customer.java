@@ -84,12 +84,22 @@ public class Customer implements Serializable {
     @OneToMany(fetch = FetchType.LAZY)
     public Set<Order> orders = new HashSet<>();
 
-    
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "customer_role",
+            joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "email"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<Role> role;
     
 
 
-    @ManyToMany(mappedBy = "customer")
-    private Set<Role> role = new HashSet<>();
+  /*   @ManyToMany(mappedBy = "customer")
+    private Set<Role> role = new HashSet<>(); */
+
+    public Set<Role> getRole() {
+        return role;
+    }
 
 
     // @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

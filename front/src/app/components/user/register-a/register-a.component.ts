@@ -16,10 +16,10 @@ export class RegisterAComponent {
   selectedDniType: string = 'DNI';
   registrationForm!: FormGroup;
 
-  customeremail!: any;
+  customeremail!: string;
   role:CustomerRole={
-    role_id: 1,
-    customer_id: "",
+    idrole: 1,
+    idcustomer: "",
   }
 
 
@@ -78,7 +78,7 @@ export class RegisterAComponent {
     }
   }
   registerCustomer(): void {
-    this.role.customer_id = this.registrationForm.get('email')?.value; 
+    this.role.idcustomer= this.registrationForm.get('email')?.value; 
 
 
   if (this.registrationForm.valid) { 
@@ -114,7 +114,7 @@ export class RegisterAComponent {
     } 
 
 
-    this.customerService.registerCustomerRole(this.role).subscribe((data: CustomerRole) => {
+    this.customerService.registerCustomerRole(this.role.idrole, this.role.idcustomer).subscribe((data: CustomerRole) => {
       console.log(data);
     });
   }

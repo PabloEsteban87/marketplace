@@ -62,13 +62,16 @@ public class Role{
     @JoinColumn(name = "customer_id")
     private Customer customer;  */
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    /* @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "customer_role",
             joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "email")
     )
-    private Set<Customer> customer;
+    private Set<Customer> customer; */
+
+    @ManyToMany(mappedBy = "role")
+    private Set<Customer> customer = new HashSet<>();
 
     public Set<Customer> getCustomer() {
         return customer;
