@@ -11,6 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+
+import org.factoriaf5.comicbooks.config.SecurityConfiguration;
 
 public class CustomerServiceTest {
     private CustomerService service;
@@ -20,10 +23,14 @@ public class CustomerServiceTest {
     public void testCreateCustomer() {
         repository = mock(CustomerRepository.class);
 
+       SecurityConfiguration configuration = new SecurityConfiguration();
+
+
+
   
 
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String password = passwordEncoder.encode("password");
+        String password = passwordEncoder.encode("password"); 
 
         Customer savedCustomer = new Customer("user5@user.com", "29920371A", "Lola", "Flores", "Rosas", "La buenecita",
                 14, "3", "dcha", "3", "A", 30033, "Madrid", "Madrid",
@@ -31,6 +38,7 @@ public class CustomerServiceTest {
 
         when(repository.save(any(Customer.class))).thenReturn(savedCustomer);
         when(repository.findByEmail("user5@user.com")).thenReturn(java.util.Optional.of(savedCustomer));
+        when(configuration.passwordEncoder()).thenReturn(savedCustomer.getPassword());
 
         service = new CustomerService(repository);
         Customer response = service.create(savedCustomer);
