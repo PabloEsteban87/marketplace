@@ -71,11 +71,11 @@ public class Role{
     private Set<Customer> customer; */
 
     @ManyToMany(mappedBy = "role")
-    private Set<Customer> customer;
+    private Set<Customer> customer; 
 
-    public Set<Customer> getCustomer() {
+     public Set<Customer> getCustomer() {
         return customer;
-    }
+    } 
 
 
       //añadido Pablo

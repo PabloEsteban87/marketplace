@@ -57,7 +57,7 @@ public class SecurityConfiguration  implements WebMvcConfigurer{
 
                         .requestMatchers("/roles/**").permitAll()
                         .requestMatchers("/customer_role/**").permitAll()
-                        .requestMatchers("/orders/**").permitAll())
+                        .requestMatchers("/orders/**").permitAll()
 
 
                         .requestMatchers("/orders/**").permitAll()
