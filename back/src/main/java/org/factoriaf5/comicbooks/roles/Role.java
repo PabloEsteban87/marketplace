@@ -71,7 +71,7 @@ public class Role{
     private Set<Customer> customer; */
 
     @ManyToMany(mappedBy = "role")
-    private Set<Customer> customer = new HashSet<>();
+    private Set<Customer> customer;
 
     public Set<Customer> getCustomer() {
         return customer;
