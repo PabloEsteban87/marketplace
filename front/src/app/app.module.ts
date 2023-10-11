@@ -27,6 +27,7 @@ import { EditComicComponent } from './components/admin/edit-comic/edit-comic.com
 import { AdminloginviewComponent } from './views/adminloginview/adminloginview.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { UserPurchaseHistoryViewComponent } from './views/user-purchase-history-view/user-purchase-history-view.component';
+import { UserPurchaseHistoryAdminComponent } from './components/admin/user-purchase-history-admin/user-purchase-history-admin.component';
 
 
 
@@ -55,6 +56,7 @@ import { UserPurchaseHistoryViewComponent } from './views/user-purchase-history-
     EditComicComponent,
     AdminloginviewComponent,
     UserPurchaseHistoryViewComponent,
+    UserPurchaseHistoryAdminComponent,
   ],
   imports: [
     BrowserModule,

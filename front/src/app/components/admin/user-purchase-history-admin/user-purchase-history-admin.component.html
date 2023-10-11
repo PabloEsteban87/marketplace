@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Historial de Compras</h3>
+      <div class="container">
+        <div class="container-search">
+          <input ng-model="searchText" class="search-up" type="text" placeholder="Introduce tu búsqueda"
+            [(ngModel)]="searchTextGlobal" (input)="globalsearch()" />
+        </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="col-md-1">Fecha</th>
+            
+            <th class="col-md-1">
+                  <div class="container-th">
+                    <p>Código</p>
+                    <button class="btn btn-link btn-sm fixed-sort-buttons" (click)="toggleSortOrderPopup('A-Z')">
+                      <img src="../../../assets/G49.png" alt="Orden A-Z" />
+                    </button>
+                    <label for="codigoFilter" (click)="toggleFilterPopup('isbn')" class="filter-label">
+                      <img src="../../../assets/buscar.png" alt="Filtrar por codigo" class="filter-icon" />
+                    </label>
+                  </div>
+                  <div #popup class="filter-popup" *ngIf="showisbnFilterPopup">
+                    <input id="authorFilter" type="text" class="form-control" [(ngModel)]="columnFilters. isbn"
+                      (input)="applyFilters()" placeholder="Buscar código..." />
+                  </div>
+            </th>
+            <th class="col-md-2">
+              <div class="container-th">
+                <p>Título</p>
+                <button class="btn btn-link btn-sm fixed-sort-buttons" (click)="toggleSortOrderPopup('A-Z')">
+                  <img src="../../../assets/G49.png" alt="Orden Z-A" />
+                </button>
+                <button class="btn btn-link btn-sm fixed-sort-buttons" (click)="toggleSearch()">
+                  <img class="filter-icon" src="../../../assets/buscar.png" alt="Buscar" />
+                </button>
+              </div>
+              <div #popup (mouseleave)="onMouseOut(popup)" class="filter-popup" *ngIf="showSearchPopup">
+                <input id="searchInput" type="text" class="form-control" [(ngModel)]="columnFilters.title" (input)="applyFilters()"
+                  placeholder="Buscar Titulo..." />
+              </div>
+            </th>
+            <th class="col-md-2">
+              <div class="container-th">
+                <p>Autor</p>
+                <button class="btn btn-link btn-sm fixed-sort-buttons" (click)="toggleSortOrderPopup('A-Z')">
+                  <img src="../../../assets/G49.png" alt="Orden A-Z" />
+                </button>
+                <label for="authorFilter" class="filter-label">
+                  <img src="../../../assets/buscar.png" alt="Filtrar por Autor" class="filter-icon"
+                    (click)="toggleFilterPopup('author')" />
+                </label>
+              </div>
+              <div #popup (mouseleave)="onMouseOut(popup)" class="filter-popup" *ngIf="showAuthorFilterPopup">
+                <input id="authorFilter" type="text" class="form-control"[(ngModel)]="columnFilters.author"
+                  (input)="applyFilters()" placeholder="Buscar autor..." />
+              </div>
+            </th>
+            <th class="col-md-2">
+              <div class="container-th">
+                <p>Géneros</p>
+                <label for="genreFilter" class="filter-label">
+                  <img src="../../../assets/filter.png" alt="Filtrar por Género" class="filter-icon"
+                    (click)="toggleFilterPopup('genre')" />
+                </label>
+              </div>
+              <div #popup (mouseleave)="onMouseOut(popup)" class="filter-popup" *ngIf="showGenreFilterPopup">
+                <select id="genreFilter" class="form-control" [(ngModel)]="columnFilters.genre" (change)="applyFilters()">
+                  <option [ngValue]="null">Todos</option>
+                  <option *ngFor="let genre of genres" [ngValue]="genre.id">
+                    {{ genre.name }}
+                  </option>
+                </select>
+              </div>
+            </th>
+            <th class="col-md-2">Precio</th>
+            <th class="col-md-2">
+              <div class="container-th">
+                <p>Tapa</p>
+                <label for="coverTypeFilter" class="filter-label">
+                  <img src="../../../assets/filter.png" alt="Filtrar por Tapa" class="filter-icon"
+                    (click)="toggleFilterPopup('coverType')" />
+                </label>
+
+              </div>
+              <div #popup (mouseleave)="onMouseOut(popup)" class="filter-popup" *ngIf="showCoverTypeFilterPopup">
+                <select id="coverTypeFilter" class="form-control filter-dropdown" [(ngModel)]="columnFilters.coverType"
+                  (change)="applyFilters()">
+                  <option [ngValue]="null">Todos</option>
+                  <option value="hard">Tapa Dura</option>
+                  <option value="soft">Tapa Blanda</option>
+                </select>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.date }}</td>
+            <td><a [routerLink]="['/comic', order.comic.isbn]"></a>{{ order.comic.isbn }}</td>
+            <td><a [routerLink]="['/comic', order.comic.isbn]">{{ order.comic.title }}</a></td>
+            <td>{{ order.comic.author }}</td>
+            <td>
+              <span *ngFor="let genre of order.comic.genres; let last = last">
+                {{ genre.name }}{{ !last ? ", " : "" }}
+              </span>
+            </td>
+            <td>{{ order.comic.price }}€</td>
+            <td>{{ order.comic.ishardcover ? "Dura" : "Blanda" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="pagination-container">
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="goToPage(1)" aria-label="First">
+          << </a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="goToPage(currentPage - 1)" aria-label="Previous">
+          < </a>
+      </li>
+      <li class="page-item">
+        <span class="page-link">
+          {{ currentPage }}
+        </span>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+        <a class="page-link" (click)="goToPage(currentPage + 1)" aria-label="Next">
+          >
+        </a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+        <a class="page-link" (click)="goToPage(getTotalPages())" aria-label="Last">
+          >>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

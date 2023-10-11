@@ -4,91 +4,112 @@
     <div class="row flex">
       <h2>Añadir nuevo Comic</h2>
     </div>
-    
+
 
     <form (ngSubmit)="onSubmit()" [formGroup]="myForm">
       <div class="row">
-      <div class="col-6">
-        <div class="card">
-          <div class="card-body">
-            <div class="form-group">
-              <label for="isbn">Isbn</label>
-              <input type="text" class="form-control" id="isbn" placeholder="Isbn" formControlName="isbn">
-              <div *ngIf="!myForm.controls['isbn'].valid && myForm.controls['isbn'].touched" class="error message">Isbn
-                no valido</div>
-              
-            </div>
-            <div class="form-group">
-              <label for="title">Titulo</label>
-              <input type="text" class="form-control" id="title" placeholder="Titulo" formControlName="title">
-            </div>
-            <div class="form-group">
-              <label for="author">Autor</label>
-              <input type="text" class="form-control" id="author" placeholder="Autor" formControlName="author">
-            </div>
-            <div class="form-group">
-              <label for="synopsis">Sinopsis</label>
-              <input type="text" class="form-control" id="synopsis" placeholder="Sinopsis" formControlName="synopsis">
-            </div>
-            <div class="form-group">
-              <label for="genre">Genero</label>
-              <select class="form-control" id="genres" placeholder="Genero">
-                <option *ngFor="let aGenre of genres" (click)="newGenre(aGenre)">{{aGenre.name}}
-                </option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="ishardcover">Tapa</label>
-              <select class="form-control" id="ishardcover" placeholder="Tapa dura?" formControlName="ishardcover">
-                <option *ngFor="let aCover of covers" [value]="aCover == 'Tapa Dura' ? true : false">{{aCover}}
-                </option>
-              </select>
-            </div>
+        <div class="col-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="isbn">Isbn</label>
+                <input type="text" class="form-control" id="isbn" placeholder="Isbn" formControlName="isbn">
+                <div *ngIf="!myForm.controls['isbn'].valid && myForm.controls['isbn'].touched" class="error message">
+                  Isbn
+                  no valido</div>
 
-            <div class="form-group">
-              <label for="price">Precio</label>
-              <input type="number" class="form-control" id="price" placeholder="Precio" formControlName="price">
-            </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Titulo</label>
+                <input type="text" class="form-control" id="title" placeholder="Titulo" formControlName="title">
+              </div>
+              <div class="form-group">
+                <label for="author">Autor</label>
+                <input type="text" class="form-control" id="author" placeholder="Autor" formControlName="author">
+              </div>
+              <div class="form-group">
+                <label for="synopsis">Sinopsis</label>
+                <textarea class="form-control" id="synopsis" placeholder="Sinopsis" formControlName="synopsis"
+                ></textarea>
+              </div>
+              <!-- <div class="form-group">
+                <label for="synopsis">Sinopsis</label>
+                <input type="text" class="form-control" id="synopsis" placeholder="Sinopsis" formControlName="synopsis">
+              </div> -->
+              <div class="form-group">
+                <label for="genre">Genero</label>
 
-            <div class="form-group">
-              <label for="stock">Stock</label>
-              <input type="number" class="form-control" id="stock" placeholder="Stock" formControlName="stock">
-            </div>
-            <div class="form-group">
-              <label for="photo">Foto</label>
-              <input [readonly]="true" type="text" class="form-control" id="photo" placeholder="Foto" formControlName="photo">
+                <select class="form-control" id="genre" placeholder="Genero" formControlName="genre" (ngModelChange)="addGenreToList($event)">
+                  <option disabled [ngValue]="null">-Seleccione un genero-</option>
+                  <!-- <option>-Seleccione un genero-</option> -->
+
+                  <option *ngFor="let aGenre of genres" [ngValue]="aGenre">{{aGenre.name}}
+                  </option>
+                </select>
+              </div>
+              <div class="list" #divList>
+                <span *ngFor="let aCurrentGenre of currentGenres;let i = index;">
+                  <{{aCurrentGenre.name}}
+                  <button class="btn-short" (click)="deleteGenre(i)">x</button>>
+                </span>
+              </div>
+
+
+              <div class="form-group">
+                <label for="ishardcover">Tapa</label>
+                <select class="form-control" id="ishardcover" placeholder="Tapa dura?" formControlName="ishardcover">
+                  <option *ngFor="let aCover of covers" [value]="aCover == 'Tapa Dura' ? true : false">{{aCover}}
+                  </option>
+                </select>
+              </div>
+
+              <div class="form-group remove-spinner">
+                <label for="price">Precio</label>
+                <input type="number" matInput class="form-control " id="price" placeholder="Precio" formControlName="price">
+              </div>
+
+              <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type="number" class="form-control" id="stock" placeholder="Stock" formControlName="stock">
+              </div>
+              <div class="form-group">
+                <label for="photo">Foto</label>
+                <input [readonly]="true" type="text" class="form-control" id="photo" placeholder="Foto"
+                  formControlName="photo">
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-6">
-        <label class="image-upload-container btn btn-bwm">
-          <span>Selecciona una imagen </span>
-          <input #imageInput type="file" accept="image/*" (change)="selectFile($event)">
-        </label>
-        <div>
-          <img [src]="preview" class="preview">
-        </div>
-        <div *ngIf="currentFile && progress" class="progress my-3">
-          <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ progress }}"
-            aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
-            {{ progress }}%
+        <div class="col-6">
+          <div class="row">
+            <label class="image-upload-container btn btn-bwm">
+              <span>Selecciona una imagen </span>
+              <input #imageInput type="file" accept="image/*" (change)="selectFile($event)">
+            </label>
+            <div>
+              <img [src]="preview" class="preview">
+            </div>
+            <div *ngIf="currentFile && progress" class="progress my-3">
+              <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ progress }}"
+                aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
+                {{ progress }}%
+              </div>
+            </div>
+            <div *ngIf="message" class="alert alert-secondary" role="alert">
+              {{ message }}
+            </div>
           </div>
-        </div>
-        <div *ngIf="message" class="alert alert-secondary" role="alert">
-          {{ message }}
-        </div>
 
+
+        </div>
       </div>
-</div>
-<div class="row flex">
-  <button type="submit" class="btn btn-success">Añadir Comic</button>
-</div>
+      <div class="row flex">
+        <button type="submit" class="btn btn-success">Añadir Comic</button>
+      </div>
 
 
-      
+
     </form>
-    <hr>
-    <pre></pre>
+ 
   </div>
 </div>

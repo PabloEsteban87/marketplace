@@ -39,7 +39,7 @@ export class NewComponent implements OnInit{
       price: [0],
       synopsis: [''],
       stock: [0],
-      // genres: this.genres,
+      genre: [],
     });
   }
   ngOnInit(): void {
@@ -145,18 +145,31 @@ export class NewComponent implements OnInit{
       this.selectedFiles = undefined;
     }
   }
+
+  addGenreToList(genre:Genre) 
+  {
+    this.addGenre(genre);
+  }
+  addGenre(genre: Genre) {
+    this.currentGenres.push(genre);
+    console.log('añadido = ' + genre.name);
+  }
+  deleteGenre(index:number){
+    console.log("function deleteGenre-> index=" + index);
+    this.currentGenres.forEach(currentGenre=>console.log(currentGenre.name));
+    this.currentGenres.splice(index,1);    
+  }  
+}
+
   addGenre(genre:Genre){
     this.genres.push(genre);
     console.log("añadido = " + genre.name);
   }
-  newGenre(genre:Genre){
-    this.currentGenre = genre;
-    // Swal.fire({
-    //   icon: 'success',
-    //   title: 'Genero seleccionado:',
-    //   text: `${this.currentGenre.name}`,
-    // })
-  }
+  
+
+  
+  
   
   
 }
+
