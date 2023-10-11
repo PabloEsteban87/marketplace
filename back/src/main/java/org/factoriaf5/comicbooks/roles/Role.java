@@ -70,8 +70,8 @@ public class Role{
     )
     private Set<Customer> customer; */
 
-    @ManyToMany(mappedBy = "role")
-    private Set<Customer> customer; 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "role")
+    private Set<Customer> customer = new HashSet<>(); 
 
      public Set<Customer> getCustomer() {
         return customer;

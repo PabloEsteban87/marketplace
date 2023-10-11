@@ -84,13 +84,13 @@ public class Customer implements Serializable {
     @OneToMany(fetch = FetchType.LAZY)
     public Set<Order> orders = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
             name = "customer_role",
             joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "email"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    private Set<Role> role;
+    private Set<Role> role  = new HashSet<>();
     
 
 
