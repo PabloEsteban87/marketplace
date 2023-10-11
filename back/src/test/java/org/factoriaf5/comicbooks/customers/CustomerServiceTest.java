@@ -38,7 +38,7 @@ public class CustomerServiceTest {
 
         when(repository.save(any(Customer.class))).thenReturn(savedCustomer);
         when(repository.findByEmail("user5@user.com")).thenReturn(java.util.Optional.of(savedCustomer));
-        when(configuration.passwordEncoder()).thenReturn(savedCustomer.getPassword());
+        when(configuration.passwordEncoder()).thenReturn(new BCryptPasswordEncoder());
 
         service = new CustomerService(repository);
         Customer response = service.create(savedCustomer);
