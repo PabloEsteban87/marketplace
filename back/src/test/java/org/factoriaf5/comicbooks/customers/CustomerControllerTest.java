@@ -50,9 +50,9 @@ public class CustomerControllerTest {
                 "La buenecita", 14, "3", "dcha", "3", "A", 30033, "Madrid", "Madrid",
                 "$2a$12$BwyEzyYm8ssMjYY9HLvrq.LwIxYbfApeAM41kyP7o6ZyYq8B542wO");
 
-        when(CustomerService.create(customerToCreate)).thenReturn(customerToCreate);
+        when(CustomerService.create(customerToCreate, 1L, "USER")).thenReturn(customerToCreate);
 
-        ResponseEntity<Customer> response = CustomerController.create(customerToCreate);
+        ResponseEntity<Customer> response = CustomerController.create(customerToCreate, 1L, "USER");
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
 

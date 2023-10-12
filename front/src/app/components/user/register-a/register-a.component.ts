@@ -59,7 +59,7 @@ export class RegisterAComponent {
             ),
           ],
         ],
-        dniType: ['', Validators.required],
+/*         dniType: ['', Validators.required], */
         dni: ['', [Validators.required, Validators.pattern('[0-9]{8}[A-Z]')]],
         name: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
         surname: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
@@ -91,7 +91,7 @@ export class RegisterAComponent {
   registerCustomer(): void {
     this.role.idcustomer = this.registrationForm.get('email')?.value;
 
-  /*   if (this.registrationForm.valid) { */
+     if (this.registrationForm.valid) { 
       const registrationData = this.registrationForm.value;
 
       this.customerService.register(registrationData, this.role.idrole, this.role.idcustomer).subscribe(
@@ -113,13 +113,13 @@ export class RegisterAComponent {
           console.error('Error durante el registro', error);
         }
       );
-    /* } else {
+     } else {
       Swal.fire({
         icon: 'error',
         title: 'Error de validación',
         text: 'Por favor, complete todos los campos correctamente',
       });
-    } */
+    } 
 
   /*   this.customerService
       .registerCustomerRole(this.role.idrole, this.role.idcustomer)

@@ -14,19 +14,27 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import org.factoriaf5.comicbooks.roles.CustomerDetailsService;
 
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-public class SecurityConfiguration  implements WebMvcConfigurer{
+public class SecurityConfiguration implements WebMvcConfigurer {
+
+    CustomerDetailsService customerDetailsService;
+
+    public SecurityConfiguration(CustomerDetailsService customerDetailsService) {
+        this.customerDetailsService = customerDetailsService;
+    }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-            .allowCredentials(true)
-           /*  .allowedOrigins("*") */
-            .allowedOriginPatterns("*")
-            .allowedMethods("GET","POST","PUT","DELETE");
+                .allowCredentials(true)
+                /* .allowedOrigins("*") */
+                .allowedOriginPatterns("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE");
     }
 
     @Bean
@@ -39,7 +47,7 @@ public class SecurityConfiguration  implements WebMvcConfigurer{
 
         http
                 .cors(withDefaults())
-                .csrf(csfr -> csfr.disable()) 
+                .csrf(csfr -> csfr.disable())
                 .formLogin(form -> form.disable())
                 .logout(out -> out
                         .logoutUrl("/logout")
@@ -59,9 +67,9 @@ public class SecurityConfiguration  implements WebMvcConfigurer{
                         .requestMatchers("/customer_role/**").permitAll()
                         .requestMatchers("/orders/**").permitAll()
 
-
-                        .requestMatchers("/orders/**").permitAll()
+                        /* .requestMatchers("/orders/**").permitAll() */
                         .requestMatchers("/files/**").permitAll())
+                .userDetailsService(customerDetailsService)
 
                 .httpBasic(withDefaults())
                 .sessionManagement(session -> session
@@ -71,6 +79,4 @@ public class SecurityConfiguration  implements WebMvcConfigurer{
 
     }
 
-
-   
 }

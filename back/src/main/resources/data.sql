@@ -80,7 +80,7 @@ INSERT INTO customers (email, dni, name, surname, surname2, province, town, post
 INSERT INTO customers (email, dni, name, surname, surname2, province, town, postalcode, street, number, stair,floor, gate, letter, password) VALUES ("jaime@gmail.com","29920371A","jaime","sanchez","sanchez","malaga","malaga",30033,"El Coronel La Piara",14,"dcha","3","3","A","$2a$12$BwyEzyYm8ssMjYY9HLvrq.LwIxYbfApeAM41kyP7o6ZyYq8B542wO");
 INSERT INTO customers (email, dni, name, surname, surname2, province, town, postalcode, street, number, stair,floor, gate, letter, password) VALUES ("Bartolomeo@gmail.com","29920371A","Bartolomeo","Gutierrez","Queleveo","malaga","malaga",30033,"c/La Princesa Cisne",14,"izda","98","5","H","$2a$12$BwyEzyYm8ssMjYY9HLvrq.LwIxYbfApeAM41kyP7o6ZyYq8B542wO"); 
 
-INSERT INTO customer_role (role_id, customer_id) VALUES(1, "user@user.com");
+INSERT INTO customer_role (role_id, customer_id) VALUES(2, "user@user.com");
 
 
 /* orders */

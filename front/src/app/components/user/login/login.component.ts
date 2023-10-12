@@ -6,8 +6,12 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
+import { CustomerRole } from '../../../models/CustomerRole';
+import {CustomerService} from 'src/app/services/customer.service'
+import { Customer } from 'src/app/models/Customer.model';
+
 @Component({
-  selector: 'app-login',
+  selector: 'app-login', 
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -18,7 +22,8 @@ export class LoginComponent {
   constructor(
     private service: LoginService,
     private router: Router,
-    private userService: UserService 
+    private userService: UserService,
+    private customerservice: CustomerService 
   ) { }
 
   login() {
@@ -28,6 +33,9 @@ export class LoginComponent {
     }
   
     this.service.postLogin(bodyData).subscribe((resultData: any) => {
+      this.customerservice.getCustomer(this.email).subscribe((customer: Customer) => {
+      customer.
+    });
       if (resultData.message == "Email not exist") {
         Swal.fire({
           icon: 'error',

@@ -1,5 +1,7 @@
 package org.factoriaf5.comicbooks.roles;
 
+/* import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user; */
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -21,12 +23,13 @@ public class CustomerDetailsImpl  implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-    //    Role roles = customer.getRole();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-       
-            // authorities.add(new SimpleGrantedAuthority(roles.getRole()));
-      
+        for (Role role : customer.getRole()) {
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getRole());
+            authorities.add(authority);
+        }
+
         return authorities;
        
     }

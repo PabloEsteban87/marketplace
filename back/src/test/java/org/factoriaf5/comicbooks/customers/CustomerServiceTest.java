@@ -23,7 +23,7 @@ public class CustomerServiceTest {
 
         service = new CustomerService(repository, null);
 
-        Customer response = service.create(savedCustomer);
+        Customer response = service.create(savedCustomer, 1L , "USER");
 
         assertNotNull(response);
 

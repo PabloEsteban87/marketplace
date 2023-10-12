@@ -16,6 +16,10 @@ export class CustomerService {
     return this.httpClient.post<Customer>(`${this.customerUrl}/${idcustomer}/role/${idrole}`, customer);
   }
 
+/*   getCustomerRole(idrole: number, idcustomer: string){
+    return this.httpClient.get<Customer>(`${this.customerUrl}/${idcustomer}/role/${idrole}`);
+  } */
+
   /* registerCustomerRole(idrole: number, idcustomer: string) : Observable<CustomerRole>{
 
     return this.httpClient.post<CustomerRole>(`${this.customerUrl}/${idcustomer}/role/${idrole}`, {});
