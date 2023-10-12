@@ -11,6 +11,8 @@ import org.factoriaf5.comicbooks.orders.Order;
 import org.factoriaf5.comicbooks.roles.Role;
 import org.factoriaf5.comicbooks.roles.RoleEnum;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -90,6 +92,7 @@ public class Customer implements Serializable {
             joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "email"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
+    @JsonIgnore
     private Set<Role> role  = new HashSet<>();
     
 

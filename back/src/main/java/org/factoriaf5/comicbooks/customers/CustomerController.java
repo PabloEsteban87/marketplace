@@ -34,9 +34,9 @@ public class CustomerController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping
-    public ResponseEntity<Customer> create(@RequestBody Customer customer) {
-        Customer customerSaved = service.create(customer);
+    @PostMapping(path = "/{idcustomer}/role/{idrole}")
+    public ResponseEntity<Customer> create(@RequestBody Customer customer, @PathVariable(value = "idrole") Long idrole, @PathVariable(value = "idcustomer") String idcustomer) {
+        Customer customerSaved = service.create(customer, idrole, idcustomer);
         return ResponseEntity.status(HttpStatus.OK).body(customerSaved);
     }
 
@@ -71,8 +71,8 @@ public class CustomerController {
         return ResponseEntity.ok(loginResponse);
     }
 
-    @PostMapping(path = "/{idcustomer}/role/{idrole}")
-    public ResponseEntity<?> addRoleToCustomer(@PathVariable Long idrole, @PathVariable String idcustomer) {
+  /*   @PostMapping(path = "/{idcustomer}/role/{idrole}")
+    public ResponseEntity<Customer> addRoleToCustomer(@PathVariable(value = "idrole") Long idrole, @PathVariable(value = "idcustomer") String idcustomer) {
         return ResponseEntity.ok(service.addRoleToCustomer(idrole, idcustomer));
-    }
+    } */
 }

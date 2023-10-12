@@ -40,8 +40,11 @@ public class CustomerService {
          
     }
 
-    public Customer create(Customer customer) {
+    public Customer create(Customer customer, Long idrole, String idcustomer) {
         customer.setPassword(this.passwordEncoder.encode(customer.getPassword()));
+        Role role = repository2.findById(idrole).orElseThrow(() -> new RuntimeException("No se encontró la entidad role"));
+          role.getCustomer().add(customer);
+          customer.getRole().add(role);
         return repository.save(customer);
     }
 

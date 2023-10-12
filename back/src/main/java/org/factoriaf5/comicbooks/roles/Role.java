@@ -10,6 +10,8 @@ import org.factoriaf5.comicbooks.customers.Customer;
 import org.factoriaf5.comicbooks.genres.Genre;
 import org.factoriaf5.comicbooks.orders.Order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -71,6 +73,7 @@ public class Role{
     private Set<Customer> customer; */
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "role")
+    @JsonIgnore
     private Set<Customer> customer = new HashSet<>(); 
 
      public Set<Customer> getCustomer() {

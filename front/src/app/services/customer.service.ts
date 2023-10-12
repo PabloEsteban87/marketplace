@@ -12,14 +12,14 @@ export class CustomerService {
    private customerUrl2 = 'http://localhost:8000/roles'
   
   constructor(private httpClient: HttpClient) { }
-  register(customer : Customer){
-    return this.httpClient.post<Customer>(this.customerUrl, customer);
+  register(customer : Customer, idrole: number, idcustomer: string){
+    return this.httpClient.post<Customer>(`${this.customerUrl}/${idcustomer}/role/${idrole}`, customer);
   }
 
-  registerCustomerRole(idrole: number, idcustomer: string) : Observable<CustomerRole>{
+  /* registerCustomerRole(idrole: number, idcustomer: string) : Observable<CustomerRole>{
 
     return this.httpClient.post<CustomerRole>(`${this.customerUrl}/${idcustomer}/role/${idrole}`, {});
-  }
+  } */
   
   getCustomer(email: string) : Observable<Customer>{
     return this.httpClient.get<Customer>(this.customerUrl + "/" + email);
