@@ -25,4 +25,9 @@ export class OrderService {
   createOrder(order: Order): Observable<Order> {
     return this.http.post<Order>(`${this.baseUrl}`, order);
   }
+
+  createOrderComic(order: any): Observable<any[]> {
+    return this.http.post<any[]>(`${this.baseUrl}`, order);
+  }
+
 }
