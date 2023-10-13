@@ -40,6 +40,13 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body(customerSaved);
     }
 
+    @GetMapping("/role")
+    public ResponseEntity<List<Customer>> getRoleCustomer() {
+        List<Customer> serviceGetAll = service.getRoleCustomer();
+        return ResponseEntity.status(HttpStatus.OK).body(serviceGetAll);
+    } 
+    
+
     
 
     @GetMapping(path = { "/{email}" })

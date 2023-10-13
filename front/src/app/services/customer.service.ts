@@ -9,16 +9,26 @@ import { CustomerRole } from '../models/CustomerRole';
 })
 export class CustomerService {
   private customerUrl = 'http://localhost:8000/customers'
-   private customerUrl2 = 'http://localhost:8000/roles'
+   private customerUrl2 = 'http://localhost:8000/role'
   
   constructor(private httpClient: HttpClient) { }
   register(customer : Customer, idrole: number, idcustomer: string){
     return this.httpClient.post<Customer>(`${this.customerUrl}/${idcustomer}/role/${idrole}`, customer);
   }
 
-/*   getCustomerRole(idrole: number, idcustomer: string){
-    return this.httpClient.get<Customer>(`${this.customerUrl}/${idcustomer}/role/${idrole}`);
-  } */
+  getCustomerRole() : any{
+    return this.httpClient.get<any>(this.customerUrl2);
+  }
+
+
+
+ /*  getCustomerRoleEmail(idcustomer: string){
+    return this.httpClient.get<CustomerRole>(`${this.customerUrl}/${idcustomer}`);
+  } 
+
+  getCustomerRole(idrole: number, idcustomer: string){
+    return this.httpClient.get<CustomerRole>(`${this.customerUrl}/${idcustomer}/role/${idrole}`);
+  }  */
 
   /* registerCustomerRole(idrole: number, idcustomer: string) : Observable<CustomerRole>{
 

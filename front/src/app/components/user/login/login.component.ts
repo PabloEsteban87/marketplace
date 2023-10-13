@@ -6,9 +6,10 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
-import { CustomerRole } from '../../../models/CustomerRole';
+import { CustomerRole } from '../../../models/CustomerRole2';
 import {CustomerService} from 'src/app/services/customer.service'
 import { Customer } from 'src/app/models/Customer.model';
+
 
 @Component({
   selector: 'app-login', 
@@ -18,6 +19,11 @@ import { Customer } from 'src/app/models/Customer.model';
 export class LoginComponent {
   email: string = "";
   password: string = "";
+
+  role: CustomerRole = {
+    role_id: 0,
+    customer_id: '',
+  };
 
   constructor(
     private service: LoginService,
@@ -33,9 +39,15 @@ export class LoginComponent {
     }
   
     this.service.postLogin(bodyData).subscribe((resultData: any) => {
-      this.customerservice.getCustomer(this.email).subscribe((customer: Customer) => {
-      customer.
-    });
+      this.customerservice.getCustomerRole().subscribe((customerrole: CustomerRole) => {
+        if(customerrole.role_id == 2){
+            console.log("admin")
+        }
+        else{
+       
+
+
+   
       if (resultData.message == "Email not exist") {
         Swal.fire({
           icon: 'error',
@@ -79,6 +91,8 @@ export class LoginComponent {
           confirmButtonColor: '#ff0000',
         });
       }
+    }
+    });
     });
   }
 }

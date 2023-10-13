@@ -108,5 +108,8 @@ public class CustomerService {
         }         
     }
 
+   public List<Customer> getRoleCustomer() {
+        return repository.findAllByCustomerRole();
+    } 
 
 }
