@@ -64,7 +64,7 @@ export class ShopingCartClientComponent {
     console.log(this.comics);
       for(let i= 0; i<= this.comics.length; i++){
         let comic = {
-          isbn: this.comics[i].isbn,
+          comic_isbn: this.comics[i].isbn,
           title: this.comics[i].title,
           genres: this.comics[i].genres,
           price: this.comics[i].price,
